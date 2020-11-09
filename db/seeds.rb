@@ -5,3 +5,36 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'rest-client'
+require_relative '../config/environment'
+require 'json'
+
+Activity.destroy_all
+User.destroy_all
+
+ba_array = []
+
+200.times do
+    ba = RestClient.get('http://www.boredapi.com/api/activity/')
+
+    ba_array.push(JSON.parse(ba))
+end
+
+ba_array.each do |activity|
+    Activity.create(
+        name: activity["activity"],
+        activity_type: activity["type"],
+        participants: activity["participants"],
+        price: activity["price"],
+        activity_link: activity["link"],
+        accessibility: activity["accessibility"]
+    )
+end
+
+10.times do
+    User.create(
+        username: Faker::Name.name,  
+        email: Faker::Internet.email, 
+        password: "1234"
+    )
+end
