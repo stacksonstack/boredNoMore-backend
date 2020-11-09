@@ -1,4 +1,4 @@
 class Activity < ApplicationRecord
-    has_many :useractivities
-    has_many :users, through: :useractivities
+    has_many :user_activities
+    has_many :users, through: :user_activities
 end
