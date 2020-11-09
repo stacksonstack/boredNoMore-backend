@@ -13,11 +13,15 @@ Activity.destroy_all
 User.destroy_all
 
 ba_array = []
-
+key_array = []
 200.times do
     ba = RestClient.get('http://www.boredapi.com/api/activity/')
-
-    ba_array.push(JSON.parse(ba))
+    data = JSON.parse(ba)
+    if(key_array.include?(data["key"]) == false)
+        ba_array.push(data)
+    end
+    key_array.push(data["key"])
+    
 end
 
 ba_array.each do |activity|

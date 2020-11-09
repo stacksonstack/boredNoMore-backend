@@ -4,4 +4,12 @@ class Api::V1::ActivitiesController < ApplicationController
         activity = Activity.find(params[:id])
         render json: activity
     end
+
+    def index
+        activities = Activity.all
+        render json: activities
+    end
+
+    
+    
 end
