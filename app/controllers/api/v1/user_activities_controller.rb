@@ -1,13 +1,18 @@
 class Api::V1::UserActivitiesController < ApplicationController
-    
+
     def show
         userActivity = UserActivity.find(params[:id])
         render json: userActivity
     end
 
     def index
-        userActivities = UserActivity.all
-        render json: userActivities
+        if logged_in?
+            userActivities = @current_user.user_activities
+        else
+            userActivities = UserActivity.all 
+        end
+        # userActivities = UserActivity.all
+        # render json: userActivities
     end
 
     def new
