@@ -21,7 +21,6 @@ key_array = []
         ba_array.push(data)
     end
     key_array.push(data["key"])
-    
 end
 
 ba_array.each do |activity|
